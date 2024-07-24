@@ -7,8 +7,8 @@ import satori, { type SatoriOptions } from 'satori'
 import { Ticket } from '#app/components/ticket.js'
 import { cache, getDomainUrl, getErrorMessage } from '#app/utils.tsx'
 
-const WIDTH = 1200
-const HEIGHT = 630
+const WIDTH = 800
+const HEIGHT = 1200
 
 export async function loader({ request }: LoaderFunctionArgs) {
 	const url = new URL(request.url)
@@ -141,7 +141,6 @@ async function getFont({
 }) {
 	const weightsString = weights.join(';')
 	const fetchUrl = `https://fonts.googleapis.com/css2?family=${font}:wght@${weightsString}`
-	console.log(fetchUrl)
 	const css = await cachified({
 		key: fetchUrl,
 		cache,

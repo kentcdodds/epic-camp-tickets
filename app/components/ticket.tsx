@@ -4,6 +4,7 @@ import {
 	epicWebLogo,
 	nxLogo,
 	prismaLogo,
+	thisDotLogo,
 	tursoLogo,
 } from './sponsors.tsx'
 
@@ -24,50 +25,23 @@ export function Ticket({
 		<Layout domain={domain} ticketNumber={ticketNumber}>
 			<div
 				style={{
+					flex: 1,
 					display: 'flex',
-					zIndex: 10,
 					flexDirection: 'column',
-					justifyContent: 'center',
+					justifyContent: 'flex-start',
 					alignItems: 'center',
-					height: '100%',
-					width: '100%',
 					color: 'white',
-					padding: 100,
+					padding: '50px 20px 20px 20px',
 				}}
 			>
 				<div
 					style={{
 						display: 'flex',
-						width: '100%',
-						justifyContent: 'space-between',
-						gap: 50,
+						flexDirection: 'column',
+						gap: 30,
 						alignItems: 'center',
-						padding: '0 30px',
 					}}
 				>
-					<div style={{ display: 'flex', flexDirection: 'column' }}>
-						<h1
-							style={{
-								display: 'flex',
-								flexWrap: 'wrap',
-								fontSize: '80px',
-								// https://github.com/vercel/satori/issues/498
-								textWrap: name.includes(' ') ? 'balance' : 'initial',
-								fontWeight: 700,
-								marginBottom: 12,
-							}}
-						>
-							{name}
-						</h1>
-						<p
-							style={{
-								display: 'flex',
-								fontSize: '40px',
-							}}
-						>
-							{handle}
-						</p>
-					</div>
 					<img
 						src={avatar}
 						style={{
@@ -78,6 +52,49 @@ export function Ticket({
 							border: '4px solid white',
 						}}
 					/>
+					<div
+						style={{
+							display: 'flex',
+							flexDirection: 'column',
+							gap: 24,
+							alignItems: 'center',
+						}}
+					>
+						<h1
+							style={{
+								display: 'flex',
+								flexWrap: 'wrap',
+								fontSize: '80px',
+								// https://github.com/vercel/satori/issues/498
+								textWrap: name.includes(' ') ? 'balance' : 'initial',
+								textAlign: 'center',
+								fontWeight: 700,
+								margin: 0,
+							}}
+						>
+							{name}
+						</h1>
+						<p
+							style={{
+								display: 'flex',
+								fontSize: '40px',
+								margin: 10,
+							}}
+						>
+							{handle}
+						</p>
+						<p
+							style={{
+								display: 'flex',
+								fontSize: '30px',
+								textAlign: 'center',
+								textWrap: 'balance',
+								margin: 0,
+							}}
+						>
+							An epic experience in the mountains of Utah
+						</p>
+					</div>
 				</div>
 			</div>
 		</Layout>
@@ -110,11 +127,13 @@ function Layout({
 			<div
 				style={{
 					display: 'flex',
+					flexDirection: 'column',
 					position: 'relative',
 					height: '100%',
 					width: '100%',
 					borderRadius: 20,
 					overflow: 'hidden',
+					padding: '60px 40px 40px 40px',
 				}}
 			>
 				<div
@@ -125,8 +144,8 @@ function Layout({
 						right: 0,
 						bottom: 0,
 						left: 0,
-						width: '100%',
-						height: '100%',
+						width: 800,
+						height: 1200,
 						backgroundColor: '#080B16',
 					}}
 				>
@@ -143,81 +162,99 @@ function Layout({
 				<div
 					style={{
 						display: 'flex',
-						position: 'absolute',
-						left: 40,
-						top: '50%',
-						transform: 'translateY(-50%)',
-						width: 20,
-						height: 80,
-						backgroundColor: 'white',
-						borderRadius: 20,
-					}}
-				/>
-				<div
-					style={{
-						display: 'flex',
-						position: 'absolute',
-						top: 30,
-						left: 30,
-						gap: 12,
-						alignItems: 'center',
+						height: '100%',
+						width: '100%',
+						flexDirection: 'column',
+						position: 'relative',
 					}}
 				>
-					{epicWebLogo}
-					<h1 style={{ fontSize: 30, fontWeight: 700 }}>Epic Web Camp</h1>
-				</div>
-				<div
-					style={{
-						display: 'flex',
-						position: 'absolute',
-						top: 30,
-						right: 30,
-						gap: 12,
-						alignItems: 'center',
-						fontSize: 50,
-						fontWeight: 200,
-					}}
-				>
-					#{ticketNumber.padStart(2, '0')}
-				</div>
-				{children}
-				<div
-					style={{
-						display: 'flex',
-						justifyContent: 'center',
-						alignItems: 'center',
-						gap: 16,
-						position: 'absolute',
-						bottom: 20,
-						left: 30,
-						opacity: 0.8,
-					}}
-				>
-					{cloneElement(tursoLogo, {
-						style: { height: 50, width: 50 },
-					})}
-					{cloneElement(convexLogo, {
-						style: { height: 50, width: 50 },
-					})}
-					{cloneElement(nxLogo, {
-						style: { height: 32, width: 50 },
-					})}
-					{cloneElement(prismaLogo, {
-						style: { height: 50, width: 41 },
-					})}
-				</div>
-				<div
-					style={{
-						display: 'flex',
-						position: 'absolute',
-						bottom: 20,
-						right: 30,
-						opacity: 0.8,
-						fontSize: 40,
-						fontWeight: 700,
-					}}
-				>
-					epicweb.dev/camp
+					<div
+						style={{
+							display: 'flex',
+							justifyContent: 'center',
+						}}
+					>
+						<div
+							style={{
+								display: 'flex',
+								width: 80,
+								height: 20,
+								backgroundColor: 'white',
+								borderRadius: 20,
+							}}
+						/>
+					</div>
+					<div style={{ display: 'flex', height: 30 }} />
+					<div style={{ display: 'flex', justifyContent: 'space-between' }}>
+						<div
+							style={{
+								display: 'flex',
+								gap: 12,
+								alignItems: 'center',
+							}}
+						>
+							{epicWebLogo}
+							<h1 style={{ fontSize: 30, fontWeight: 700 }}>Epic Web Camp</h1>
+						</div>
+						<div
+							style={{
+								display: 'flex',
+								gap: 12,
+								alignItems: 'center',
+								fontSize: 50,
+								fontWeight: 300,
+								letterSpacing: 2,
+							}}
+						>
+							#{ticketNumber.padStart(2, '0')}
+						</div>
+					</div>
+					{children}
+					<div
+						style={{
+							display: 'flex',
+							flexDirection: 'column',
+							gap: 34,
+							justifyContent: 'center',
+							alignItems: 'center',
+						}}
+					>
+						<div
+							style={{
+								display: 'flex',
+								justifyContent: 'center',
+								alignItems: 'center',
+								gap: 24,
+								opacity: 0.8,
+							}}
+						>
+							{cloneElement(tursoLogo, {
+								style: { height: 50, width: 50 },
+							})}
+							{cloneElement(convexLogo, {
+								style: { height: 50, width: 50 },
+							})}
+							{cloneElement(nxLogo, {
+								style: { height: 32, width: 50 },
+							})}
+							{cloneElement(prismaLogo, {
+								style: { height: 50, width: 41 },
+							})}
+							{cloneElement(thisDotLogo, {
+								style: { height: 30, width: 50 },
+							})}
+						</div>
+						<div
+							style={{
+								display: 'flex',
+								opacity: 0.8,
+								fontSize: 40,
+								fontWeight: 700,
+							}}
+						>
+							epicweb.dev/camp
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>

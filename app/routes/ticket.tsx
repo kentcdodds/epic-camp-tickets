@@ -97,8 +97,8 @@ export default function TicketRoute() {
 			<div>
 				<div
 					style={{
-						width: 1200,
-						height: 630,
+						height: 1200,
+						width: 800,
 						display: 'block',
 						margin: 'auto',
 						backgroundColor: 'hsl(0, 0%, 90%)',
