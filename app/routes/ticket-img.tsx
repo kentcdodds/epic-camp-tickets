@@ -42,7 +42,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
 	const debug = url.searchParams.get('debug') === 'true'
 
 	try {
-		const ogImg = await cachified({
+		const { svg, img } = await cachified({
 			// if debug is true, then force, otherwise use undefined and it'll be derived from the request
 			// forceFresh: debug ? debug : undefined,
 			forceFresh: true,
@@ -54,14 +54,25 @@ export async function loader({ request }: LoaderFunctionArgs) {
 				return await getOgImg(element, { request })
 			},
 		})
-		return new Response(ogImg, {
-			headers: {
-				'Cache-Control': !(debug || url.searchParams.has('fresh'))
-					? 'public, max-age=31536000, immutable'
-					: 'no-cache no-store',
-				'Content-Type': 'image/png',
-			},
-		})
+		if (url.searchParams.get('svg') === 'true') {
+			return new Response(svg, {
+				headers: {
+					'Cache-Control': !(debug || url.searchParams.has('fresh'))
+						? 'public, max-age=31536000, immutable'
+						: 'no-cache no-store',
+					'Content-Type': 'image/svg+xml',
+				},
+			})
+		} else {
+			return new Response(img, {
+				headers: {
+					'Cache-Control': !(debug || url.searchParams.has('fresh'))
+						? 'public, max-age=31536000, immutable'
+						: 'no-cache no-store',
+					'Content-Type': 'image/png',
+				},
+			})
+		}
 	} catch (error) {
 		return new Response(getErrorMessage(error), {
 			status: 500,
@@ -97,9 +108,9 @@ async function getOgImg(
 
 	const resvg = new Resvg(svg)
 	const pngData = resvg.render()
-	const data = pngData.asPng()
+	const img = pngData.asPng()
 
-	return data
+	return { svg, img }
 }
 
 async function getEmoji(emoji: string) {
