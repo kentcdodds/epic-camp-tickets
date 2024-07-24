@@ -25,7 +25,7 @@ export function Ticket({
 			<div
 				style={{
 					display: 'flex',
-					zIndex: '10',
+					zIndex: 10,
 					flexDirection: 'column',
 					justifyContent: 'center',
 					alignItems: 'center',

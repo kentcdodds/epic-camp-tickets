@@ -1,11 +1,11 @@
 import { cachified } from '@epic-web/cachified'
-import { invariant } from '@epic-web/invariant'
+import { invariant, invariantResponse } from '@epic-web/invariant'
 import { type LoaderFunctionArgs } from '@remix-run/node'
 import { Resvg } from '@resvg/resvg-js'
 import { renderToStaticMarkup } from 'react-dom/server'
 import satori, { type SatoriOptions } from 'satori'
 import { Ticket } from '#app/components/ticket.js'
-import { getErrorMessage, cache, getDomainUrl } from '#app/utils.tsx'
+import { cache, getDomainUrl, getErrorMessage } from '#app/utils.tsx'
 
 const WIDTH = 1200
 const HEIGHT = 630
@@ -17,10 +17,10 @@ export async function loader({ request }: LoaderFunctionArgs) {
 	const avatar = url.searchParams.get('avatar')
 	const ticketNumber = url.searchParams.get('ticketNumber')
 
-	invariant(name, 'name is required')
-	invariant(handle, 'handle is required')
-	invariant(avatar, 'avatar is required')
-	invariant(ticketNumber, 'ticketNumber is required')
+	invariantResponse(name, 'name is required')
+	invariantResponse(handle, 'handle is required')
+	invariantResponse(avatar, 'avatar is required')
+	invariantResponse(ticketNumber, 'ticketNumber is required')
 
 	const element = (
 		<Ticket
