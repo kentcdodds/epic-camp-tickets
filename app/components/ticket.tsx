@@ -16,12 +16,15 @@ export function Ticket({
 	domain,
 	ticketNumber,
 }: {
-	name: string
-	avatar: string
-	handle: string
+	name: string | null
+	avatar: string | null
+	handle: string | null
 	domain: string
-	ticketNumber: string
+	ticketNumber: string | null
 }) {
+	name ??= ' '
+	avatar ??= `${domain}/img/profile-filler.png`
+	handle ??= ' '
 	return (
 		<Layout domain={domain} ticketNumber={ticketNumber}>
 			<div
@@ -107,7 +110,7 @@ function Layout({
 	children,
 	ticketNumber,
 }: {
-	ticketNumber: string
+	ticketNumber: string | null
 	domain: string
 	children: React.ReactNode
 }) {
@@ -207,7 +210,7 @@ function Layout({
 								letterSpacing: 2,
 							}}
 						>
-							#{ticketNumber.padStart(2, '0')}
+							{ticketNumber ? `#${ticketNumber.padStart(2, '0')}` : ' '}
 						</div>
 					</div>
 					{children}

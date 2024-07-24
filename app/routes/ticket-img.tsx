@@ -1,5 +1,5 @@
 import { cachified } from '@epic-web/cachified'
-import { invariant, invariantResponse } from '@epic-web/invariant'
+import { invariant } from '@epic-web/invariant'
 import { type LoaderFunctionArgs } from '@remix-run/node'
 import { Resvg } from '@resvg/resvg-js'
 import { renderToStaticMarkup } from 'react-dom/server'
@@ -16,11 +16,6 @@ export async function loader({ request }: LoaderFunctionArgs) {
 	const handle = url.searchParams.get('handle')
 	const avatar = url.searchParams.get('avatar')
 	const ticketNumber = url.searchParams.get('ticketNumber')
-
-	invariantResponse(name, 'name is required')
-	invariantResponse(handle, 'handle is required')
-	invariantResponse(avatar, 'avatar is required')
-	invariantResponse(ticketNumber, 'ticketNumber is required')
 
 	const element = (
 		<Ticket
