@@ -2,6 +2,7 @@ import { cloneElement } from 'react'
 import {
 	convexLogo,
 	epicWebLogo,
+	flyLogo,
 	nxLogo,
 	prismaLogo,
 	thisDotLogo,
@@ -214,11 +215,21 @@ function Layout({
 						style={{
 							display: 'flex',
 							flexDirection: 'column',
-							gap: 34,
+							gap: 50,
 							justifyContent: 'center',
 							alignItems: 'center',
 						}}
 					>
+						<div
+							style={{
+								display: 'flex',
+								gap: 50,
+								justifyContent: 'center',
+								alignItems: 'center',
+							}}
+						>
+							{cloneElement(flyLogo, { style: { height: 80 } })}
+						</div>
 						<div
 							style={{
 								display: 'flex',
@@ -243,16 +254,6 @@ function Layout({
 							{cloneElement(thisDotLogo, {
 								style: { height: 30, width: 50 },
 							})}
-						</div>
-						<div
-							style={{
-								display: 'flex',
-								opacity: 0.8,
-								fontSize: 40,
-								fontWeight: 700,
-							}}
-						>
-							epicweb.dev/camp
 						</div>
 					</div>
 				</div>
