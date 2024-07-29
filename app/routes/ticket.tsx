@@ -1,5 +1,7 @@
 import { json, type LoaderFunctionArgs } from '@remix-run/node'
 import { useLoaderData, useSearchParams } from '@remix-run/react'
+import { sha256 } from 'hash-wasm'
+import { useEffect } from 'react'
 import { Ticket } from '#app/components/ticket.tsx'
 import { getDomainUrl } from '#app/utils.js'
 
@@ -13,6 +15,22 @@ export default function TicketRoute() {
 	const { domain } = useLoaderData<typeof loader>()
 	const [params, setParams] = useSearchParams()
 
+	const email = params.get('email')
+
+	useEffect(() => {
+		if (email)
+			void sha256(email).then((hash) =>
+				setParams((oldParams) => {
+					const newParams = new URLSearchParams(oldParams)
+					newParams.set(
+						'avatar',
+						`https://gravatar.com/avatar/${hash}?s=680&d=retro`,
+					)
+					return newParams
+				}),
+			)
+	}, [email, setParams])
+
 	const ticketUrl = `/ticket-img?${new URLSearchParams(params)}`
 
 	function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -23,6 +41,7 @@ export default function TicketRoute() {
 			return newParams
 		})
 	}
+
 	return (
 		<div
 			style={{
@@ -65,12 +84,25 @@ export default function TicketRoute() {
 						/>
 					</label>
 					<label>
+						Email:{' '}
+						<input
+							name="email"
+							value={params.get('email') ?? ''}
+							onChange={handleChange}
+						/>
+					</label>
+					<p style={{ opacity: 0.8 }}>
+						<strong>Note</strong>: the email is just used to prefill the avatar
+						with gravatar if they did not provide a custom avatar
+					</p>
+					<label>
 						Avatar:{' '}
 						<input
 							required
 							name="avatar"
 							value={params.get('avatar') ?? ''}
 							onChange={handleChange}
+							style={{ width: '100%', maxWidth: 500 }}
 						/>
 					</label>
 					<label>
@@ -82,7 +114,9 @@ export default function TicketRoute() {
 							onChange={handleChange}
 						/>
 					</label>
-					<button type="submit">Submit</button>
+					<button style={{ width: 'fit-content' }} type="submit">
+						Submit
+					</button>
 				</form>
 				<a style={{ color: 'white' }} href={ticketUrl} target="_blank">
 					Open Ticket Image
