@@ -12,10 +12,10 @@ const HEIGHT = 1200
 
 export async function loader({ request }: LoaderFunctionArgs) {
 	const url = new URL(request.url)
-	const name = url.searchParams.get('name')
-	const handle = url.searchParams.get('handle')
-	const avatar = url.searchParams.get('avatar')
-	const ticketNumber = url.searchParams.get('ticketNumber')
+	const name = url.searchParams.get('name') || null
+	const handle = url.searchParams.get('handle') || null
+	const avatar = url.searchParams.get('avatar') || null
+	const ticketNumber = url.searchParams.get('ticketNumber') || null
 
 	const element = (
 		<Ticket

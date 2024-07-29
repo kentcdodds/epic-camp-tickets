@@ -100,10 +100,10 @@ export default function TicketRoute() {
 				>
 					<Ticket
 						domain={domain}
-						name={params.get('name')}
-						handle={params.get('handle')}
-						avatar={params.get('avatar')}
-						ticketNumber={params.get('ticketNumber')}
+						name={params.get('name') || null}
+						handle={params.get('handle') || null}
+						avatar={params.get('avatar') || null}
+						ticketNumber={params.get('ticketNumber') || null}
 					/>
 				</div>
 			</div>
