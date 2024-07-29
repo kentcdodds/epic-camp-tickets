@@ -110,3 +110,8 @@ export default function TicketRoute() {
 		</div>
 	)
 }
+
+// there's no reason to revalidate this route...
+export function shouldRevalidate() {
+	return false
+}
