@@ -197,7 +197,7 @@ function Layout({
 								alignItems: 'center',
 							}}
 						>
-							{cloneElement(epicWebLogo, { width: 80, height: 80 })}
+							{cloneElement(epicWebLogo, { width: 68, height: 80 })}
 							<h1 style={{ fontSize: 30, fontWeight: 700 }}>Epic Web Camp</h1>
 						</div>
 						<div
@@ -243,7 +243,7 @@ function Layout({
 							}}
 						>
 							{cloneElement(tursoLogo, {
-								style: { height: 50, width: 50 },
+								style: { height: 43, width: 50 },
 							})}
 							{cloneElement(convexLogo, {
 								style: { height: 50, width: 50 },

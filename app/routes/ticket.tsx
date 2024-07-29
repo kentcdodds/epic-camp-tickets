@@ -1,6 +1,5 @@
 import { json, type LoaderFunctionArgs } from '@remix-run/node'
-import { useLoaderData } from '@remix-run/react'
-import { useState } from 'react'
+import { useLoaderData, useSearchParams } from '@remix-run/react'
 import { Ticket } from '#app/components/ticket.tsx'
 import { getDomainUrl } from '#app/utils.js'
 
@@ -12,22 +11,17 @@ export async function loader({ request }: LoaderFunctionArgs) {
 
 export default function TicketRoute() {
 	const { domain } = useLoaderData<typeof loader>()
-	const [params, setParams] = useState({
-		name: 'Kent C. Dodds',
-		handle: '@kentcdodds',
-		avatar:
-			'https://pbs.twimg.com/profile_images/1567269493608714241/6ACZo99k_400x400.jpg',
-		ticketNumber: '0',
-	})
+	const [params, setParams] = useSearchParams()
 
 	const ticketUrl = `/ticket-img?${new URLSearchParams(params)}`
 
 	function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
 		const { name, value } = e.currentTarget
-		setParams((oldParams) => ({
-			...oldParams,
-			[name]: value,
-		}))
+		setParams((oldParams) => {
+			const newParams = new URLSearchParams(oldParams)
+			newParams.set(name, value)
+			return newParams
+		})
 	}
 	return (
 		<div
@@ -57,7 +51,7 @@ export default function TicketRoute() {
 						<input
 							required
 							name="name"
-							value={params.name}
+							value={params.get('name') ?? ''}
 							onChange={handleChange}
 						/>
 					</label>
@@ -66,7 +60,7 @@ export default function TicketRoute() {
 						<input
 							required
 							name="handle"
-							value={params.handle}
+							value={params.get('handle') ?? ''}
 							onChange={handleChange}
 						/>
 					</label>
@@ -75,7 +69,7 @@ export default function TicketRoute() {
 						<input
 							required
 							name="avatar"
-							value={params.avatar}
+							value={params.get('avatar') ?? ''}
 							onChange={handleChange}
 						/>
 					</label>
@@ -84,7 +78,7 @@ export default function TicketRoute() {
 						<input
 							required
 							name="ticketNumber"
-							value={params.ticketNumber}
+							value={params.get('ticketNumber') ?? ''}
 							onChange={handleChange}
 						/>
 					</label>
@@ -106,10 +100,10 @@ export default function TicketRoute() {
 				>
 					<Ticket
 						domain={domain}
-						name={params.name}
-						handle={params.handle}
-						avatar={params.avatar}
-						ticketNumber={params.ticketNumber}
+						name={params.get('name')}
+						handle={params.get('handle')}
+						avatar={params.get('avatar')}
+						ticketNumber={params.get('ticketNumber')}
 					/>
 				</div>
 			</div>
