@@ -124,7 +124,7 @@ function Layout({
 				height: '100%',
 				position: 'relative',
 				padding: 40,
-				background: 'linear-gradient(45deg, #23a6d5, #1587e0, #0f69b4)',
+				background: 'linear-gradient(105deg, #5ed77a, #35d25d, #4bd07a)',
 				color: 'white',
 			}}
 		>
@@ -197,7 +197,7 @@ function Layout({
 								alignItems: 'center',
 							}}
 						>
-							{epicWebLogo}
+							{cloneElement(epicWebLogo, { width: 80, height: 80 })}
 							<h1 style={{ fontSize: 30, fontWeight: 700 }}>Epic Web Camp</h1>
 						</div>
 						<div
