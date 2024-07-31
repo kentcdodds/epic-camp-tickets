@@ -1,7 +1,6 @@
 import { json, type LoaderFunctionArgs } from '@remix-run/node'
 import { useLoaderData, useSearchParams } from '@remix-run/react'
 import { sha256 } from 'hash-wasm'
-import { useEffect } from 'react'
 import { Ticket } from '#app/components/ticket.tsx'
 import { getDomainUrl } from '#app/utils.js'
 
@@ -15,22 +14,6 @@ export default function TicketRoute() {
 	const { domain } = useLoaderData<typeof loader>()
 	const [params, setParams] = useSearchParams()
 
-	const email = params.get('email')
-
-	useEffect(() => {
-		if (email)
-			void sha256(email).then((hash) =>
-				setParams((oldParams) => {
-					const newParams = new URLSearchParams(oldParams)
-					newParams.set(
-						'avatar',
-						`https://gravatar.com/avatar/${hash}?s=680&d=retro`,
-					)
-					return newParams
-				}),
-			)
-	}, [email, setParams])
-
 	const ticketUrl = `/ticket-img?${new URLSearchParams(params)}`
 
 	function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -40,6 +23,18 @@ export default function TicketRoute() {
 			newParams.set(name, value)
 			return newParams
 		})
+		if (name === 'email') {
+			void sha256(value).then((hash) =>
+				setParams((oldParams) => {
+					const newParams = new URLSearchParams(oldParams)
+					newParams.set(
+						'avatar',
+						`https://gravatar.com/avatar/${hash}?s=680&d=retro`,
+					)
+					return newParams
+				}),
+			)
+		}
 	}
 
 	return (

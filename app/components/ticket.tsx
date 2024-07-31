@@ -2,7 +2,7 @@ import { cloneElement } from 'react'
 import {
 	convexLogo,
 	epicWebLogo,
-	flyLogo,
+	tigrisLogo,
 	nxLogo,
 	prismaLogo,
 	thisDotLogo,
@@ -229,9 +229,10 @@ function Layout({
 								gap: 50,
 								justifyContent: 'center',
 								alignItems: 'center',
+								opacity: 0.9,
 							}}
 						>
-							{cloneElement(flyLogo, { style: { height: 80 } })}
+							{cloneElement(tigrisLogo, { style: { height: 80 } })}
 						</div>
 						<div
 							style={{
