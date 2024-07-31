@@ -232,7 +232,7 @@ function Layout({
 								opacity: 0.9,
 							}}
 						>
-							{cloneElement(tigrisLogo, { style: { height: 80 } })}
+							{cloneElement(tigrisLogo, { style: { width: 197, height: 80 } })}
 						</div>
 						<div
 							style={{
