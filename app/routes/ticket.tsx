@@ -14,19 +14,33 @@ export default function TicketRoute() {
 	const { domain } = useLoaderData<typeof loader>()
 	const [params, setParams] = useSearchParams()
 
-	const ticketUrl = `/ticket-img?${new URLSearchParams(params)}`
+	const ticketImgUrl = `/ticket-img?${new URLSearchParams(params)}`
+	const ticketSvgUrl = `/ticket-svg?${new URLSearchParams(params)}`
 
 	function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
-		const { name, value } = e.currentTarget
+		let { name, value, checked, type } = e.currentTarget
+		if (type === 'checkbox') value = checked ? 'on' : ''
+
 		setParams((oldParams) => {
 			const newParams = new URLSearchParams(oldParams)
-			newParams.set(name, value)
+			if (value) newParams.set(name, value)
+			else newParams.delete(name)
 			return newParams
 		})
 		if (name === 'email') {
+			if (!value) {
+				setParams((oldParams) => {
+					const newParams = new URLSearchParams(oldParams)
+					newParams.delete('email')
+					newParams.delete('avatar')
+					return newParams
+				})
+				return
+			}
 			void sha256(value).then((hash) =>
 				setParams((oldParams) => {
 					const newParams = new URLSearchParams(oldParams)
+					newParams.set('email', value)
 					newParams.set(
 						'avatar',
 						`https://gravatar.com/avatar/${hash}?s=680&d=retro`,
@@ -52,7 +66,7 @@ export default function TicketRoute() {
 				<form
 					onSubmit={(e) => {
 						e.preventDefault()
-						window.open(ticketUrl, '_blank')
+						window.open(ticketImgUrl, '_blank')
 					}}
 					style={{
 						display: 'flex',
@@ -104,18 +118,31 @@ export default function TicketRoute() {
 						Ticket Number:{' '}
 						<input
 							required
+							type="number"
+							min="0"
 							name="ticketNumber"
 							value={params.get('ticketNumber') ?? ''}
 							onChange={handleChange}
 						/>
 					</label>
-					<button style={{ width: 'fit-content' }} type="submit">
-						Submit
-					</button>
+					<label>
+						Lanyard hole:{' '}
+						<input
+							type="checkbox"
+							name="lanyardHole"
+							value={params.get('lanyardHole') === 'on' ? 'on' : ''}
+							onChange={handleChange}
+						/>
+					</label>
 				</form>
-				<a style={{ color: 'white' }} href={ticketUrl} target="_blank">
-					Open Ticket Image
-				</a>
+				<div style={{ display: 'flex', gap: 8, flexDirection: 'column' }}>
+					<a style={{ color: 'white' }} href={ticketImgUrl} target="_blank">
+						Open Ticket Image
+					</a>
+					<a style={{ color: 'white' }} href={ticketSvgUrl} target="_blank">
+						Open Ticket SVG
+					</a>
+				</div>
 			</div>
 			<div>
 				<div
@@ -133,6 +160,7 @@ export default function TicketRoute() {
 						handle={params.get('handle') || null}
 						avatar={params.get('avatar') || null}
 						ticketNumber={params.get('ticketNumber') || null}
+						lanyardHole={params.get('lanyardHole') === 'on' || false}
 					/>
 				</div>
 			</div>

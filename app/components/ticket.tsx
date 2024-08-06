@@ -15,18 +15,24 @@ export function Ticket({
 	handle,
 	domain,
 	ticketNumber,
+	lanyardHole,
 }: {
 	name: string | null
 	avatar: string | null
 	handle: string | null
 	domain: string
 	ticketNumber: string | null
+	lanyardHole: boolean
 }) {
 	name ??= ' '
 	avatar ??= `${domain}/img/profile-filler.png`
 	handle ??= ' '
 	return (
-		<Layout domain={domain} ticketNumber={ticketNumber}>
+		<Layout
+			domain={domain}
+			ticketNumber={ticketNumber}
+			lanyardHole={lanyardHole}
+		>
 			<div
 				style={{
 					flex: 1,
@@ -109,10 +115,12 @@ function Layout({
 	domain,
 	children,
 	ticketNumber,
+	lanyardHole,
 }: {
 	ticketNumber: string | null
 	domain: string
 	children: React.ReactNode
+	lanyardHole: boolean
 }) {
 	return (
 		<div
@@ -137,7 +145,7 @@ function Layout({
 					width: '100%',
 					borderRadius: 20,
 					overflow: 'hidden',
-					padding: '60px 40px 40px 40px',
+					padding: '60px 40px 10px 40px',
 				}}
 			>
 				<div
@@ -183,12 +191,12 @@ function Layout({
 								display: 'flex',
 								width: 80,
 								height: 20,
-								backgroundColor: 'white',
+								backgroundColor: lanyardHole ? 'white' : 'transparent',
 								borderRadius: 20,
 							}}
 						/>
 					</div>
-					<div style={{ display: 'flex', height: 30 }} />
+					{/* <div style={{ display: 'flex', height: 30 }} /> */}
 					<div style={{ display: 'flex', justifyContent: 'space-between' }}>
 						<div
 							style={{
@@ -218,7 +226,7 @@ function Layout({
 						style={{
 							display: 'flex',
 							flexDirection: 'column',
-							gap: 50,
+							gap: 30,
 							justifyContent: 'center',
 							alignItems: 'center',
 						}}
