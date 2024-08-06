@@ -145,7 +145,7 @@ function Layout({
 					width: '100%',
 					borderRadius: 20,
 					overflow: 'hidden',
-					padding: '60px 40px 10px 40px',
+					padding: '60px 40px 20px 40px',
 				}}
 			>
 				<div
