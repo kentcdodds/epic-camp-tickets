@@ -7,6 +7,7 @@ import {
 	prismaLogo,
 	thisDotLogo,
 	tursoLogo,
+	sanityLogo,
 } from './sponsors.tsx'
 
 export function Ticket({
@@ -265,6 +266,9 @@ function Layout({
 							})}
 							{cloneElement(thisDotLogo, {
 								style: { height: 30, width: 50 },
+							})}
+							{cloneElement(sanityLogo, {
+								style: { height: 50, width: 50 },
 							})}
 						</div>
 					</div>
