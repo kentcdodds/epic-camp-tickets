@@ -268,7 +268,7 @@ function Layout({
 								style: { height: 30, width: 50 },
 							})}
 							{cloneElement(sanityLogo, {
-								style: { height: 50, width: 50 },
+								style: { height: 50, width: 39 },
 							})}
 						</div>
 					</div>
